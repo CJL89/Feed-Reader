@@ -31,7 +31,7 @@ $(function() {
             allFeeds.forEach(function(allFeeds) {
                 expect(allFeeds.url).toBeDefined();
                 expect(allFeeds.url.length).not.toBe("");
-            })
+            });
         });
 
         // Loops through each feed in the allFeeds object and ensures it has a name defined and that the name is not empty.
@@ -39,7 +39,7 @@ $(function() {
             allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
                 expect(feed.name.length).not.toBe("");
-            })
+            });
         });
     });
 
@@ -60,9 +60,9 @@ $(function() {
         it("menu display when clicked and hide when clicked again", function() {
             var menuClick = $("a.menu-icon-link");
             menuClick.trigger("click");
-            expect(menuHide).toBe(false);
+            expect($("body").hasClass("menu-hidden")).toBe(false);
             menuClick.trigger("click");
-            expect(menuHide).toBe(true);
+            expect($("body").hasClass("menu-hidden")).toBe(true);
         });
     });
 
