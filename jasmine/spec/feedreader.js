@@ -75,8 +75,8 @@ $(function() {
         });
 
         it("has an entry", function() {
-            var feedList = $("body").hasClass("entry-link entry");
-            expect(feedList.length).not.toBe(0);
+            var feedList = document.querySelectorAll(".feed .entry");
+            expect(feedList.length).toBeGreaterThan(0);
         });
      });
 
@@ -84,19 +84,23 @@ $(function() {
     describe("New Feed Selection", function() {
 
         var contentLoad;
+        var modifiedContent;
 
         // Ensures when a new feed is loaded by the loadFeed function that the content actually changes.
         beforeEach(function(done) {
             loadFeed(0, function() {
                 contentLoad = $(".feed").html();
-                loadFeed(1, function() {
-                    done();
-                });
+                loadFeed(1, done);
             });
         });
 
-        it("verifies that the feed is not empty", function() {
-            expect(contentLoad.length).not.toBe(0);
+        it("verifies that the feed is loaded, not empty and the content is not equal to each other", function() {
+            modifiedContent = $(".feed").html();
+            expect(contentLoad).not.toBe(modifiedContent);
+        });
+
+        afterAll(function(done) {
+            loadFeed(0, done);
         });
     });
 }());
